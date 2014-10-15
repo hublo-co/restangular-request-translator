@@ -36,8 +36,7 @@
     return o;
   }
 
-  angular.module('hublo/restangular-request-translator', [])
-    .constant('RestangularRequestTranslator', {
+  var RestangularRequestTranslator = {
       camelCaseToUnderscore: function (element, operation, route, url, headers, params, httpConfig) {
         element = recursiveKeyTransformation(element, camelCaseToUnderscore);
 
@@ -57,6 +56,10 @@
         // Do the opposite in responses
         RestangularProvider.addResponseInterceptor(RestangularRequestTranslator.underscoreToCamelCase);
       }
-    });
+    }
+  };
+
+  angular.module('hublo/restangular-request-translator', [])
+    .constant('RestangularRequestTranslator', RestangularRequestTranslator);
 })();
 
