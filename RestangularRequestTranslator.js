@@ -37,25 +37,24 @@
   }
 
   var RestangularRequestTranslator = {
-      camelCaseToUnderscore: function (element, operation, route, url, headers, params, httpConfig) {
-        element = recursiveKeyTransformation(element, camelCaseToUnderscore);
+    camelCaseToUnderscore: function (element, operation, route, url, headers, params, httpConfig) {
+      element = recursiveKeyTransformation(element, camelCaseToUnderscore);
 
-        return {
-          element: element,
-        };
-      },
-      underscoreToCamelCase: function (data, operation, what, url, response, deferred) {
-        data = recursiveKeyTransformation(data, underscoreToCamelCase);
+      return {
+        element: element,
+      };
+    },
+    underscoreToCamelCase: function (data, operation, what, url, response, deferred) {
+      data = recursiveKeyTransformation(data, underscoreToCamelCase);
 
-        return data;
-      },
-      plug: function (RestangularProvider) {
-        // Switch all camelCase to camel_case in requests
-        RestangularProvider.addFullRequestInterceptor(RestangularRequestTranslator.camelCaseToUnderscore);
+      return data;
+    },
+    plug: function (RestangularProvider) {
+      // Switch all camelCase to camel_case in requests
+      RestangularProvider.addFullRequestInterceptor(RestangularRequestTranslator.camelCaseToUnderscore);
 
-        // Do the opposite in responses
-        RestangularProvider.addResponseInterceptor(RestangularRequestTranslator.underscoreToCamelCase);
-      }
+      // Do the opposite in responses
+      RestangularProvider.addResponseInterceptor(RestangularRequestTranslator.underscoreToCamelCase);
     }
   };
 
